@@ -23,7 +23,7 @@
                 , <&macro_release &kp GLOBE>         // Fn release
                 ;
       }
-    }
+    };
 
         keymap {
                 compatible = "zmk,keymap";
