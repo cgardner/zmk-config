@@ -9,6 +9,22 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+
+    macros {
+      dictation: dictation {
+        compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            label = "DICTATION";
+            wait-ms = <100>;
+            tap-ms = <50>;
+            bindings
+                = <&macro_press &kp GLOBE>           // Fn press
+                , <&macro_tap &kp F5>                // F5
+                , <&macro_release &kp GLOBE>         // Fn release
+                ;
+      }
+    }
+
         keymap {
                 compatible = "zmk,keymap";
 
