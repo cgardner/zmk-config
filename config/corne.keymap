@@ -22,7 +22,7 @@
                 , <&macro_tap &kp F5>                // F5
                 , <&macro_release &kp GLOBE>         // Fn release
                 ;
-      }
+      };
     };
 
         keymap {
