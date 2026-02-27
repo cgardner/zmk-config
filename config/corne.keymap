@@ -31,11 +31,11 @@
             wait-ms = <100>;
             tap-ms = <50>;
             bindings
-                = <&macro_press &kp LCTRL>          // Fn press
-                , <&macro_press &kp LSHIFT>         // Fn press
-                , <&macro_tap &kp F5>               // F5
-                , <&macro_release &kp LCTRL>        // Fn release
-                , <&macro_release &kp LSHIFT>       // Fn release
+                = <&macro_press &kp LCTRL>          // LCTRL press
+                , <&macro_press &kp LSHIFT>         // LSHIFT press
+                , <&macro_tap &kp N5>               // 5
+                , <&macro_release &kp LCTRL>        // LCTRL release
+                , <&macro_release &kp LSHIFT>       // LCTRL release
                 ;
       };
     };
