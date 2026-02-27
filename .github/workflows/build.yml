@@ -4,3 +4,35 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Generate tag name
+        id: tag
+        run: |
+          TAG="build-$(date +'%Y%m%d-%H%M%S')-$(echo ${{ github.sha }} | cut -c1-7)"
+          echo "tag_name=${TAG}" >> $GITHUB_OUTPUT
+
+      - name: Download firmware artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: firmware
+          path: firmware
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag_name }}
+          name: Firmware ${{ steps.tag.outputs.tag_name }}
+          body: |
+            Automated firmware build from commit ${{ github.sha }}.
+
+            Flash the `.uf2` file for your keyboard half by double-pressing
+            the reset button and copying the file to the USB drive that appears.
+          files: firmware/*.uf2
+          fail_on_unmatched_files: true
